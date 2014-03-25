@@ -53,4 +53,9 @@ class DatabaseService
 
         return $query;
     }
+
+    public function getLastInsertId($sequence_table = null)
+    {
+        return $this->getPdo()->lastInsertId($sequence_table);
+    }
 }
