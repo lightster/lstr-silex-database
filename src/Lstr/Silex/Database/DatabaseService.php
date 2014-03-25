@@ -21,15 +21,11 @@ class DatabaseService
 
     private $pdo;
 
-
-
     public function __construct(Application $app, array $config)
     {
         $this->app    = $app;
         $this->config = $config;
     }
-
-
 
     public function getPdo()
     {
@@ -48,8 +44,6 @@ class DatabaseService
 
         return $this->pdo;
     }
-
-
 
     public function query($sql, array $params = array())
     {

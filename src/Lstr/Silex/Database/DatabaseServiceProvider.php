@@ -22,12 +22,11 @@ class DatabaseServiceProvider implements ServiceProviderInterface
                 if (is_callable($config)) {
                     $config = call_user_func_array($config, array($app));
                 }
+
                 return new DatabaseService($app, $config);
             });
         });
     }
-
-
 
     public function boot(Application $app)
     {
