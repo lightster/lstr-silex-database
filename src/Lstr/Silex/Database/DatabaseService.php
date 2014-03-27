@@ -58,4 +58,31 @@ class DatabaseService
     {
         return $this->getPdo()->lastInsertId($sequence_table);
     }
+
+    public function insert($tablename, array $values)
+    {
+        $columns      = array();
+        $placeholders = array();
+        foreach ($values as $column => $value) {
+            $columns[]      = $column;
+            $placeholders[] = ":{$column}";
+        }
+
+        $column_sql      = implode(",\n", $columns);
+        $placeholder_sql = implode(",\n", $placeholders);
+
+        $this->query(
+            "
+                INSERT INTO {$tablename}
+                (
+                    {$column_sql}
+                )
+                VALUES
+                (
+                    {$placeholder_sql}
+                )
+            ",
+            $values
+        );
+    }
 }
