@@ -85,4 +85,26 @@ class DatabaseService
             $values
         );
     }
+
+    public function update($tablename, array $set_cols, $where_sql, array $values)
+    {
+        $sets = array();
+        foreach ($set_cols as $column => $placeholder) {
+            if (is_numeric($column)) {
+                $column = $placeholder;
+            }
+            $sets[] = "{$column} = :{$placeholder}";
+        }
+
+        $set_sql = implode(",\n", $sets);
+
+        $this->query(
+            "
+                UPDATE {$tablename}
+                SET {$set_sql}
+                WHERE {$where_sql}
+            ",
+            $values
+        );
+    }
 }
