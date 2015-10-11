@@ -47,11 +47,17 @@ class DatabaseService
 
     public function query($sql, array $params = array())
     {
-        $pdo   = $this->getPdo();
-        $query = $pdo->prepare($sql);
-        $query->execute($params);
+        return $this->queryWithOptions($sql, $params);
+    }
 
-        return $query;
+    public function queryMultiple($sql, array $params = array())
+    {
+        // turn on query emulation so multiple queries can be ran
+        $options = array(
+            PDO::ATTR_EMULATE_PREPARES => true,
+        );
+
+        return $this->queryWithOptions($sql, $params, $options);
     }
 
     public function getLastInsertId($sequence_table = null)
@@ -106,5 +112,14 @@ class DatabaseService
             ",
             $values
         );
+    }
+
+    private function queryWithOptions($sql, array $params = array(), array $options = array())
+    {
+        $pdo   = $this->getPdo();
+        $query = $pdo->prepare($sql, $options);
+        $query->execute($params);
+
+        return $query;
     }
 }
