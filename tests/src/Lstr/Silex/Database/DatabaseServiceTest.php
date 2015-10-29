@@ -138,6 +138,106 @@ SQL;
         }
     }
 
+    /**
+     * @dataProvider dbProvider
+     */
+    public function testUpdateRecordsUsingCustomPlaceholderNames($db)
+    {
+        $tablename = 'update_records_' . uniqid();
+        $create_table_sql = <<<SQL
+CREATE SEQUENCE {$tablename}_id_seq;
+CREATE TABLE {$tablename} (
+    id INT NOT NULL,
+    a INT NOT NULL,
+    b INT NOT NULL
+);
+SQL;
+        $result = $db->queryMultiple($create_table_sql);
+
+        $expected = array(
+            1 => array('a' => 4, 'b' => 7),
+            2 => array('a' => 5, 'b' => 8),
+            3 => array('a' => 6, 'b' => 9),
+        );
+
+        for ($i = 1; $i <= 3; $i++) {
+            $record = $expected[$i];
+            $record['id'] = $i;
+            $db->insert($tablename, $record);
+        }
+
+        $new_expected = $expected;
+        $new_expected[2] = array('a' => 112, 'b' => 112);
+
+        $db->update(
+            $tablename,
+            array('a' => 'some_number', 'b' => 'some_number'),
+            'id = 2',
+            array('some_number' => 112)
+        );
+
+        $select_sql = <<<SQL
+SELECT id, a, b
+FROM {$tablename}
+ORDER BY id
+SQL;
+        $result = $db->query($select_sql);
+        while ($row = $result->fetch()) {
+            $this->assertEquals($new_expected[$row['id']]['a'], $row['a']);
+            $this->assertEquals($new_expected[$row['id']]['b'], $row['b']);
+        }
+    }
+
+    /**
+     * @dataProvider dbProvider
+     */
+    public function testUpdateRecordsUsingColumnNamesAsPlaceholderNames($db)
+    {
+        $tablename = 'update_records_' . uniqid();
+        $create_table_sql = <<<SQL
+CREATE SEQUENCE {$tablename}_id_seq;
+CREATE TABLE {$tablename} (
+    id INT NOT NULL,
+    a INT NOT NULL,
+    b INT NOT NULL
+);
+SQL;
+        $result = $db->queryMultiple($create_table_sql);
+
+        $expected = array(
+            1 => array('a' => 4, 'b' => 7),
+            2 => array('a' => 5, 'b' => 8),
+            3 => array('a' => 6, 'b' => 9),
+        );
+
+        for ($i = 1; $i <= 3; $i++) {
+            $record = $expected[$i];
+            $record['id'] = $i;
+            $db->insert($tablename, $record);
+        }
+
+        $new_expected = $expected;
+        $new_expected[2] = array('a' => 102, 'b' => 120);
+
+        $db->update(
+            $tablename,
+            array('a', 'b'),
+            'id = 2',
+            $new_expected[2]
+        );
+
+        $select_sql = <<<SQL
+SELECT id, a, b
+FROM {$tablename}
+ORDER BY id
+SQL;
+        $result = $db->query($select_sql);
+        while ($row = $result->fetch()) {
+            $this->assertEquals($new_expected[$row['id']]['a'], $row['a']);
+            $this->assertEquals($new_expected[$row['id']]['b'], $row['b']);
+        }
+    }
+
     public function dbProvider()
     {
         $app = new Application();
