@@ -2,6 +2,7 @@
 
 namespace Lstr\Silex\Database;
 
+use PDOException;
 use PHPUnit_Framework_TestCase;
 use Silex\Application;
 
@@ -15,6 +16,15 @@ class DatabaseServiceTest extends PHPUnit_Framework_TestCase
         $pdo = $db->getPdo();
         $this->assertInstanceOf('PDO', $pdo);
         $this->assertSame($pdo, $db->getPdo());
+    }
+
+    /**
+     * @dataProvider dbProvider
+     * @expectedException PDOException
+     */
+    public function testAnErrorInAQueryThrowsAnException($db)
+    {
+        $db->query('SELECT oops');
     }
 
     /**
