@@ -29,11 +29,11 @@ SELECT :last_param AS col
 ORDER BY col
 SQL;
 
-        $result = $db->query($sql, [
+        $result = $db->query($sql, array(
             'param_a'    => 1,
             'param_b'    => 2,
             'last_param' => 3,
-        ]);
+        ));
         $count = 1;
         while ($row = $result->fetch()) {
             $this->assertEquals($count, $row['col']);
@@ -46,9 +46,9 @@ SQL;
         $app = new Application();
         $db = new DatabaseService($app, $this->getConfig());
 
-        return [
-            [$db],
-        ];
+        return array(
+            array($db),
+        );
     }
 
     private function getConfig()
