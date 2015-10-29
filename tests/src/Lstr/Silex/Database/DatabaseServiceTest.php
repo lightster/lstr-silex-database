@@ -71,7 +71,7 @@ SQL;
             'last_param' => 3,
         ));
 
-$select_sql = <<<SQL
+        $select_sql = <<<SQL
 SELECT id AS col
 FROM {$tablename}
 ORDER BY col
@@ -80,6 +80,39 @@ SQL;
         $count = 1;
         while ($row = $result->fetch()) {
             $this->assertEquals($count, $row['col']);
+            ++$count;
+        }
+    }
+
+    /**
+     * @dataProvider dbProvider
+     */
+    public function testInsert($db)
+    {
+        $tablename = 'insert_queries_' . uniqid();
+        $create_table_sql = <<<SQL
+CREATE SEQUENCE {$tablename}_id_seq;
+CREATE TABLE {$tablename} (
+    id INT NOT NULL DEFAULT NEXTVAL('{$tablename}_id_seq'::regclass),
+    other INT NOT NULL
+);
+SQL;
+        $result = $db->queryMultiple($create_table_sql);
+
+        $db->insert($tablename, ['other' => 3]);
+        $db->insert($tablename, ['other' => 2]);
+        $db->insert($tablename, ['other' => 1]);
+
+        $select_sql = <<<SQL
+SELECT id, other
+FROM {$tablename}
+ORDER BY id
+SQL;
+        $result = $db->query($select_sql);
+        $count = 1;
+        while ($row = $result->fetch()) {
+            $this->assertEquals($count, $row['id']);
+            $this->assertEquals(4 - $count, $row['other']);
             ++$count;
         }
     }
