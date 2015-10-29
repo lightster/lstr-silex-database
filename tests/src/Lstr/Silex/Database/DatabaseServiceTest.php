@@ -17,6 +17,35 @@ class DatabaseServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($pdo, $db->getPdo());
     }
 
+    /**
+     * @dataProvider dbProvider
+     */
+    public function testASimpleQueryCanBeRan($db)
+    {
+        $sql = <<<SQL
+SELECT 1 AS col UNION
+SELECT 2 AS col UNION
+SELECT 3
+SQL;
+
+        $result = $db->query($sql);
+        $count = 1;
+        while ($row = $result->fetch()) {
+            $this->assertEquals($count, $row['col']);
+            ++$count;
+        }
+    }
+
+    public function dbProvider()
+    {
+        $app = new Application();
+        $db = new DatabaseService($app, $this->getConfig());
+
+        return [
+            [$db],
+        ];
+    }
+
     private function getConfig()
     {
         $config = require __DIR__ . '/../../../../config/config.php';
