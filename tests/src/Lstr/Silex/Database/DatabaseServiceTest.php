@@ -99,9 +99,9 @@ CREATE TABLE {$tablename} (
 SQL;
         $result = $db->queryMultiple($create_table_sql);
 
-        $db->insert($tablename, ['other' => 3]);
-        $db->insert($tablename, ['other' => 2]);
-        $db->insert($tablename, ['other' => 1]);
+        $db->insert($tablename, array('other' => 3));
+        $db->insert($tablename, array('other' => 2));
+        $db->insert($tablename, array('other' => 1));
 
         $select_sql = <<<SQL
 SELECT id, other
@@ -133,7 +133,7 @@ SQL;
         $result = $db->queryMultiple($create_table_sql);
 
         for ($i = 1; $i <= 3; $i++) {
-            $db->insert($tablename, ['other' => $i + 5]);
+            $db->insert($tablename, array('other' => $i + 5));
             $this->assertEquals($i, $db->getLastInsertId("{$tablename}_id_seq"));
         }
     }
