@@ -26,11 +26,11 @@ class DatabaseServiceProviderTest extends PHPUnit_Framework_TestCase
         $provider->register($app);
 
         $db_provider = $app['lstr.db'];
-        $db_shareable = $db_provider([
+        $db_shareable = $db_provider(array(
             'dsn'      => 'connection_string',
             'username' => 'username',
             'password' => 'password',
-        ]);
+        ));
         $this->assertTrue(is_callable($db_shareable));
     }
 
@@ -42,11 +42,11 @@ class DatabaseServiceProviderTest extends PHPUnit_Framework_TestCase
         $provider->register($app);
 
         $db_provider = $app['lstr.db'];
-        $app['db_shareable'] = $db_provider([
+        $app['db_shareable'] = $db_provider(array(
             'dsn'      => 'connection_string',
             'username' => 'username',
             'password' => 'password',
-        ]);
+        ));
         $this->assertInstanceOf('\Lstr\Silex\Database\DatabaseService', $app['db_shareable']);
         $this->assertSame($app['db_shareable'], $app['db_shareable']);
     }
@@ -60,11 +60,11 @@ class DatabaseServiceProviderTest extends PHPUnit_Framework_TestCase
 
         $db_provider = $app['lstr.db'];
         $app['db_shareable'] = $db_provider(function () {
-            return [
+            return array(
                 'dsn'      => 'connection_string',
                 'username' => 'username',
                 'password' => 'password',
-            ];
+            );
         });
         $this->assertInstanceOf('\Lstr\Silex\Database\DatabaseService', $app['db_shareable']);
     }
