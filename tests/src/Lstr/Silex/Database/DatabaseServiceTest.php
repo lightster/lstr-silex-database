@@ -117,6 +117,27 @@ SQL;
         }
     }
 
+    /**
+     * @dataProvider dbProvider
+     */
+    public function testLastInsertIdCanBeRetrieved($db)
+    {
+        $tablename = 'last_insert_id_' . uniqid();
+        $create_table_sql = <<<SQL
+CREATE SEQUENCE {$tablename}_id_seq;
+CREATE TABLE {$tablename} (
+    id INT NOT NULL DEFAULT NEXTVAL('{$tablename}_id_seq'::regclass),
+    other INT NOT NULL
+);
+SQL;
+        $result = $db->queryMultiple($create_table_sql);
+
+        for ($i = 1; $i <= 3; $i++) {
+            $db->insert($tablename, ['other' => $i + 5]);
+            $this->assertEquals($i, $db->getLastInsertId("{$tablename}_id_seq"));
+        }
+    }
+
     public function dbProvider()
     {
         $app = new Application();
