@@ -41,6 +41,39 @@ SQL;
         }
     }
 
+    /**
+     * @dataProvider dbProvider
+     */
+    public function testMultipleQueriesCanBeRan($db)
+    {
+        $tablename = 'test_multiple_queries_' . uniqid();
+        $populate_sql = <<<SQL
+CREATE TABLE {$tablename} (
+    id INT NOT NULL
+);
+INSERT INTO {$tablename} VALUES (:param_a);
+INSERT INTO {$tablename} VALUES (:param_b);
+INSERT INTO {$tablename} VALUES (:last_param);
+SQL;
+        $result = $db->queryMultiple($populate_sql, array(
+            'param_a'    => 1,
+            'param_b'    => 2,
+            'last_param' => 3,
+        ));
+
+$select_sql = <<<SQL
+SELECT id AS col
+FROM {$tablename}
+ORDER BY col
+SQL;
+        $result = $db->query($select_sql);
+        $count = 1;
+        while ($row = $result->fetch()) {
+            $this->assertEquals($count, $row['col']);
+            ++$count;
+        }
+    }
+
     public function dbProvider()
     {
         $app = new Application();
