@@ -23,12 +23,17 @@ class DatabaseServiceTest extends PHPUnit_Framework_TestCase
     public function testASimpleQueryCanBeRan($db)
     {
         $sql = <<<SQL
-SELECT 1 AS col UNION
-SELECT 2 AS col UNION
-SELECT 3
+SELECT :param_a AS col UNION
+SELECT :param_b AS col UNION
+SELECT :last_param AS col
+ORDER BY col
 SQL;
 
-        $result = $db->query($sql);
+        $result = $db->query($sql, [
+            'param_a'    => 1,
+            'param_b'    => 2,
+            'last_param' => 3,
+        ]);
         $count = 1;
         while ($row = $result->fetch()) {
             $this->assertEquals($count, $row['col']);
