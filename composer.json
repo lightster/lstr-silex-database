@@ -15,7 +15,8 @@
 	},
 	"require": {
 		"php": ">=5.3",
-		"silex/silex": "~1.1"
+		"silex/silex": "~1.1",
+		"lightster/yo-pdo": "~0.0.1"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^4.8.0",
