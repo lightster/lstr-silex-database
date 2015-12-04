@@ -15,47 +15,91 @@ use Silex\Application;
 
 class DatabaseService
 {
+    /**
+     * @var Application
+     */
     private $app;
+
+    /**
+     * @var array
+     */
     private $config;
 
+    /**
+     * @var YoPdo
+     */
     private $yo_pdo;
 
+    /**
+     * @param Application $app
+     * @param array $config
+     */
     public function __construct(Application $app, array $config)
     {
         $this->app    = $app;
         $this->config = $config;
     }
 
+    /**
+     * @return \PDO
+     */
     public function getPdo()
     {
         return $this->getYoPdo()->getPdo();
     }
 
+    /**
+     * @param string $sql
+     * @param array $params
+     * @return \PDOStatement
+     */
     public function query($sql, array $params = array())
     {
         return $this->getYoPdo()->query($sql, $params);
     }
 
+    /**
+     * @param string $sql
+     * @param array $params
+     * @return \PDOStatement
+     */
     public function queryMultiple($sql, array $params = array())
     {
         return $this->getYoPdo()->queryMultiple($sql, $params);
     }
 
+    /**
+     * @param string $sequence_table
+     * @return string
+     */
     public function getLastInsertId($sequence_table = null)
     {
         return $this->getYoPdo()->getLastInsertId($sequence_table);
     }
 
+    /**
+     * @param string $tablename
+     * @param array $values
+     */
     public function insert($tablename, array $values)
     {
         return $this->getYoPdo()->insert($tablename, $values);
     }
 
+    /**
+     * @param string $tablename
+     * @param array $set_cols
+     * @param string $where_sql
+     * @param array $values
+     */
     public function update($tablename, array $set_cols, $where_sql, array $values)
     {
         return $this->getYoPdo()->update($tablename, $set_cols, $where_sql, $values);
     }
 
+    /**
+     * @return YoPdo
+     */
     private function getYoPdo()
     {
         if ($this->yo_pdo) {
