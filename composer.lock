@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bd2bb11c5ef4f873ea3afec1d6a8ac4e",
-    "content-hash": "154f27976af97be0009dc295061a6aae",
+    "hash": "37c27f90a542436e17e0f1c7bc65f24c",
+    "content-hash": "05e780c4640c90f1ec2f4d334a127802",
     "packages": [
         {
             "name": "lightster/yo-pdo",
-            "version": "v0.0.1",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lightster/yo-pdo.git",
-                "reference": "e34ab5c3a5a153f2db0e4dbd6c36b693fa0b9b55"
+                "reference": "8e89b530dd554d731026025e507940d4fb22e54c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lightster/yo-pdo/zipball/e34ab5c3a5a153f2db0e4dbd6c36b693fa0b9b55",
-                "reference": "e34ab5c3a5a153f2db0e4dbd6c36b693fa0b9b55",
+                "url": "https://api.github.com/repos/lightster/yo-pdo/zipball/8e89b530dd554d731026025e507940d4fb22e54c",
+                "reference": "8e89b530dd554d731026025e507940d4fb22e54c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "php": ">=5.5"
             },
             "require-dev": {
                 "codeclimate/php-test-reporter": "dev-master",
@@ -43,7 +43,7 @@
                 "lstr",
                 "pdo"
             ],
-            "time": "2015-10-30 06:40:10"
+            "time": "2016-03-18 23:45:07"
         },
         {
             "name": "pimple/pimple",

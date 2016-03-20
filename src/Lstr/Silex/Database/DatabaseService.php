@@ -61,6 +61,16 @@ class DatabaseService
     /**
      * @param string $sql
      * @param array $params
+     * @return generator
+     */
+    public function getSelectRowGenerator($sql, array $params = array())
+    {
+        return $this->getYoPdo()->getSelectRowGenerator($sql, $params);
+    }
+
+    /**
+     * @param string $sql
+     * @param array $params
      * @return \PDOStatement
      */
     public function queryMultiple($sql, array $params = array())
