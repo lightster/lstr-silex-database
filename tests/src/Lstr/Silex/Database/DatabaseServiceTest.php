@@ -54,6 +54,30 @@ SQL;
     /**
      * @dataProvider dbProvider
      */
+    public function testARowGeneratorCanBeUsed($db_service)
+    {
+        $sql = <<<SQL
+SELECT :param_a AS col UNION
+SELECT :param_b AS col UNION
+SELECT :last_param AS col
+ORDER BY col
+SQL;
+
+        $result = $db_service->getSelectRowGenerator($sql, array(
+            'param_a'    => 1,
+            'param_b'    => 2,
+            'last_param' => 3,
+        ));
+        $count = 1;
+        foreach ($result as $row) {
+            $this->assertEquals($count, $row['col']);
+            ++$count;
+        }
+    }
+
+    /**
+     * @dataProvider dbProvider
+     */
     public function testMultipleQueriesCanBeRan($db_service)
     {
         $table_name = $this->createTable($db_service);
