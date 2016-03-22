@@ -174,6 +174,49 @@ SQL;
     }
 
     /**
+     * @dataProvider dbProvider
+     */
+    public function testBulkInserterIsUsable($db_service)
+    {
+        $this->assertUpdated(
+            $db_service,
+            function ($table_name, $condition) use ($db_service) {
+                $expected = array('a' => 102, 'b' => 120);
+
+                $db_service->update(
+                    $table_name,
+                    array('a', 'b'),
+                    $condition,
+                    $expected
+                );
+
+                return $expected;
+            }
+        );
+    }
+
+    /**
+     * @dataProvider dbProvider
+     */
+    public function testBulkInserterCanBeUsed($db_service)
+    {
+        $table_name = $this->createTable($db_service);
+
+        $bulk_inserter = $db_service->getBulkInserter($table_name, ['a', 'b'], 3);
+        $bulk_inserter->insertRecords([
+            [4, 5],
+            [102, 32],
+            [43, 12],
+        ]);
+
+        $this->assertResults($db_service, $table_name, array(
+            1 => array('a' => 4, 'b' => 5),
+            2 => array('a' => 102,'b' => 32),
+            3 => array('a' => 43, 'b' => 12),
+        ));
+    }
+
+    /**
      * @return array
      */
     public function dbProvider()

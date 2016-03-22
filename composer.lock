@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "37c27f90a542436e17e0f1c7bc65f24c",
-    "content-hash": "05e780c4640c90f1ec2f4d334a127802",
+    "hash": "92e4220fcfbc50195f171c98da79459d",
+    "content-hash": "58c0d7f83df2891e81f1893b276ee2a9",
     "packages": [
         {
             "name": "lightster/yo-pdo",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lightster/yo-pdo.git",
-                "reference": "8e89b530dd554d731026025e507940d4fb22e54c"
+                "reference": "32e76ae3e3ba29b18452af9d1ef31ce2f135954e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lightster/yo-pdo/zipball/8e89b530dd554d731026025e507940d4fb22e54c",
-                "reference": "8e89b530dd554d731026025e507940d4fb22e54c",
+                "url": "https://api.github.com/repos/lightster/yo-pdo/zipball/32e76ae3e3ba29b18452af9d1ef31ce2f135954e",
+                "reference": "32e76ae3e3ba29b18452af9d1ef31ce2f135954e",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
                 "lstr",
                 "pdo"
             ],
-            "time": "2016-03-18 23:45:07"
+            "time": "2016-03-22 21:03:20"
         },
         {
             "name": "pimple/pimple",

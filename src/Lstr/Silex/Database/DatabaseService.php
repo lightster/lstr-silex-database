@@ -108,6 +108,17 @@ class DatabaseService
     }
 
     /**
+     * @param string $table_name
+     * @param array $columns
+     * @param int $max_buffer_size
+     * @return BulkInserter
+     */
+    public function getBulkInserter($table_name, array $columns, $max_buffer_size = 250)
+    {
+        return $this->getYoPdo()->getBulkInserter($table_name, $columns, $max_buffer_size);
+    }
+
+    /**
      * @return YoPdo
      */
     private function getYoPdo()
