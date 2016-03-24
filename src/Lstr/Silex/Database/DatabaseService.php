@@ -10,7 +10,10 @@
 
 namespace Lstr\Silex\Database;
 
+use Generator;
+use Lstr\YoPdo\BulkInserter;
 use Lstr\YoPdo\Factory as YoPdoFactory;
+use Lstr\YoPdo\YoPdo;
 use Silex\Application;
 
 class DatabaseService
@@ -61,7 +64,7 @@ class DatabaseService
     /**
      * @param string $sql
      * @param array $params
-     * @return generator
+     * @return Generator
      */
     public function getSelectRowGenerator($sql, array $params = array())
     {
