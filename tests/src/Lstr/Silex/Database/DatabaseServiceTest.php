@@ -319,8 +319,11 @@ SQL;
                 $expected_result = $expected_results[$row['id']];
                 $expected_result['id'] = $row['id'];
                 $this->assertEquals($expected_result, $row);
+                unset($expected_results[$row['id']]);
             }
         }
+
+        $this->assertEmpty($expected_results);
     }
 
     /**
