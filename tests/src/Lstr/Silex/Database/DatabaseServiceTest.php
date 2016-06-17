@@ -176,6 +176,26 @@ SQL;
     /**
      * @dataProvider dbProvider
      */
+    public function testDeleteRecord($db_service)
+    {
+        $rows = $this->getSampleRows();
+        $table_name = $this->createPopulatedTable($db_service, $rows);
+
+        $expected = $rows;
+        unset($expected[2]);
+
+        $db_service->delete(
+            $table_name,
+            "id = :id",
+            array('id' => 2)
+        );
+
+        $this->assertResults($db_service, $table_name, $expected);
+    }
+
+    /**
+     * @dataProvider dbProvider
+     */
     public function testBulkInserterIsUsable($db_service)
     {
         $this->assertUpdated(
