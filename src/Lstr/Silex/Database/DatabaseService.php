@@ -111,6 +111,16 @@ class DatabaseService
     }
 
     /**
+     * @param string $tablename
+     * @param string $where_sql
+     * @param array $values
+     */
+    public function delete($tablename, $where_sql, array $values)
+    {
+        return $this->getYoPdo()->delete($tablename, $where_sql, $values);
+    }
+
+    /**
      * @param string $table_name
      * @param array $columns
      * @param int $max_buffer_size
