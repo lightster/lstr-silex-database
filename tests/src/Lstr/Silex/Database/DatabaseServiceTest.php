@@ -20,6 +20,15 @@ class DatabaseServiceTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dbProvider
+     */
+    public function testTransactionCanBeRetrieved($db_service)
+    {
+        $this->assertInstanceOf('Lstr\YoPdo\Transaction', $db_service->transaction());
+        $this->assertSame($db_service->transaction(), $db_service->transaction(), 'Reuse transaction object');
+    }
+
+    /**
+     * @dataProvider dbProvider
      * @expectedException PDOException
      */
     public function testAnErrorInAQueryThrowsAnException($db_service)

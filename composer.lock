@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "92e4220fcfbc50195f171c98da79459d",
-    "content-hash": "58c0d7f83df2891e81f1893b276ee2a9",
+    "hash": "c5b44591252ff427ff08f53fee93485d",
+    "content-hash": "19a6dfcbfb815d5315fa9654e51388e5",
     "packages": [
         {
             "name": "lightster/yo-pdo",
-            "version": "v0.1.1",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lightster/yo-pdo.git",
-                "reference": "32e76ae3e3ba29b18452af9d1ef31ce2f135954e"
+                "reference": "a3b2cb559919ebc2250a6ecc35b826d70998a628"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lightster/yo-pdo/zipball/32e76ae3e3ba29b18452af9d1ef31ce2f135954e",
-                "reference": "32e76ae3e3ba29b18452af9d1ef31ce2f135954e",
+                "url": "https://api.github.com/repos/lightster/yo-pdo/zipball/a3b2cb559919ebc2250a6ecc35b826d70998a628",
+                "reference": "a3b2cb559919ebc2250a6ecc35b826d70998a628",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
                 "lstr",
                 "pdo"
             ],
-            "time": "2016-03-22 21:03:20"
+            "time": "2016-06-24 06:36:38"
         },
         {
             "name": "pimple/pimple",
@@ -531,12 +531,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeclimate/php-test-reporter.git",
-                "reference": "892163d67e3bd9c190d43655acb69657da765c7b"
+                "reference": "9217abf84d74a6a4b7b21f2a3cf88a96118db53a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/a026a4bc86867129e760b95dca44b8cd10819333",
-                "reference": "892163d67e3bd9c190d43655acb69657da765c7b",
+                "url": "https://api.github.com/repos/codeclimate/php-test-reporter/zipball/9217abf84d74a6a4b7b21f2a3cf88a96118db53a",
+                "reference": "9217abf84d74a6a4b7b21f2a3cf88a96118db53a",
                 "shasum": ""
             },
             "require": {
@@ -581,7 +581,7 @@
                 "codeclimate",
                 "coverage"
             ],
-            "time": "2015-10-15 14:41:10"
+            "time": "2016-06-07 17:55:59"
         },
         {
             "name": "doctrine/instantiator",
@@ -1654,12 +1654,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "831f88908b51b9ce945f5e6f402931d1ac544423"
+                "reference": "524bc2ef778f99df0ba09f8985b23a379c668879"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/config/zipball/524bc2ef778f99df0ba09f8985b23a379c668879",
-                "reference": "831f88908b51b9ce945f5e6f402931d1ac544423",
+                "reference": "524bc2ef778f99df0ba09f8985b23a379c668879",
                 "shasum": ""
             },
             "require": {
