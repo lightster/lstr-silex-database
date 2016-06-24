@@ -13,6 +13,7 @@ namespace Lstr\Silex\Database;
 use Generator;
 use Lstr\YoPdo\BulkInserter;
 use Lstr\YoPdo\Factory as YoPdoFactory;
+use Lstr\YoPdo\Transaction;
 use Lstr\YoPdo\YoPdo;
 use Silex\Application;
 
@@ -49,6 +50,14 @@ class DatabaseService
     public function getPdo()
     {
         return $this->getYoPdo()->getPdo();
+    }
+
+    /**
+     * @return Transaction
+     */
+    public function transaction()
+    {
+        return $this->getYoPdo()->transaction();
     }
 
     /**
