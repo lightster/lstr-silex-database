@@ -10,7 +10,6 @@ class DatabaseServiceTest extends PHPUnit_Framework_TestCase
 {
     public function testPdoConnectionCanBeRetrieved()
     {
-        $config = $this->getConfig();
         $db_service = new DatabaseService(new Application, $this->getConfig());
 
         $pdo = $db_service->getPdo();
@@ -341,15 +340,15 @@ SQL;
         $result = $db_service->query($sql);
         while ($row = $result->fetch()) {
             if (!array_key_exists('id', $row)) {
-                $this->assertTrue(false, "Field 'id' not found in row.");
-            } else if (!array_key_exists($row['id'], $expected_results)) {
-                $this->assertTrue(false, "Row with key '{$row['id']}' not found in expected results.");
-            } else {
-                $expected_result = $expected_results[$row['id']];
-                $expected_result['id'] = $row['id'];
-                $this->assertEquals($expected_result, $row);
-                unset($expected_results[$row['id']]);
+                $this->fail("Field 'id' not found in row.");
+            } elseif (!array_key_exists($row['id'], $expected_results)) {
+                $this->fail("Row with key '{$row['id']}' not found in expected results.");
             }
+
+            $expected_result = $expected_results[$row['id']];
+            $expected_result['id'] = $row['id'];
+            $this->assertEquals($expected_result, $row);
+            unset($expected_results[$row['id']]);
         }
 
         $this->assertEmpty($expected_results);
